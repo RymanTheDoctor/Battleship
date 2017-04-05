@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 #include "MainClass.h"
 #include "Ship.h"
 #include "ShipBoard.h"
@@ -17,12 +18,20 @@ MainClass::~MainClass()
 }
 
 int main() {
-	/*Ship testing
-	Ship shipA;
-	shipA.setlocation(2, 4, 4, true);
-	shipA.gethit(4, 4);
-	if (shipA.haspartbeenhit(4, 4)) { Check that the location will be in the vector before checking the vector
-		cout << "Has been hit!";
-	}*/
+	srand(time(NULL));
+	//Not supposed to be here, just testing out how to draw the board
+	cout << "  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  10 |" << endl;
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	for (int i = 1;i <= 10;i++) {
+		cout << "  |     |     |     |     |     |     |     |     |     |     |" << endl;
+		if (i < 10) {
+			cout << i << " |     |     |     |     |     |     |     |     |     |     |" << endl;
+		}
+		else {
+			cout << i << "|     |     |     |     |     |     |     |     |     |     |" << endl;
+		}
+		cout << "  |     |     |     |     |     |     |     |     |     |     |" << endl;
+		cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	}
 	system("pause");
 }

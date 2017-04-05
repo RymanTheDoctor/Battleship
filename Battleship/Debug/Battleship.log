@@ -1,5 +1,4 @@
-﻿  Ship.cpp
-  MainClass.cpp
-  Generating Code...
+﻿  MainClass.cpp
+k:\sftwrdev\battleship\battleship\mainclass.cpp(21): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Battleship.vcxproj -> K:\SftwrDev\Battleship\Debug\Battleship.exe
   Battleship.vcxproj -> K:\SftwrDev\Battleship\Debug\Battleship.pdb (Partial PDB)
