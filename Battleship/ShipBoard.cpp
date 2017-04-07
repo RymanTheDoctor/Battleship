@@ -5,10 +5,10 @@ using namespace std;
 
 ShipBoard::ShipBoard()
 {
-	bool successfullyPlaced, chosenRotation, notPassedTest;
-	int chosenSize, chosenX, chosenY;
+	bool retry, chosenRotation;
+	int chosenSize, chosenX, chosenY, spotcheck;
 	for (int i = 1;i <= 5;i++) { //For each ship (there are 5)
-		successfullyPlaced = false;
+		retry = true;
 		//Make the right size ship based on what iteration this is
 		if (i < 3) {
 			chosenSize = i + 1;
@@ -16,8 +16,7 @@ ShipBoard::ShipBoard()
 		else {
 			chosenSize = i;
 		}
-		while (!successfullyPlaced) { //While the ship has not been placed
-			notPassedTest = true;
+		while (retry) { //While the ship has not been placed
 			//Choose a rotation and position for the ship
 			if (rand() % 2) {
 				chosenRotation = true;
@@ -33,120 +32,122 @@ ShipBoard::ShipBoard()
 			{
 			case 1:
 				destroyer.setlocation(chosenX, chosenY, 2, chosenRotation);
-				successfullyPlaced = true;
+				retry = false;
 				break;
 			case 2:
 				cruiser.setlocation(chosenX, chosenY, 3, chosenRotation);
+				spotcheck = 0;
 				if (chosenRotation) { //Horizontal
-					for (int j = 0;j < 3;j++) {
-						if (destroyer.doesshipoccupy(chosenX+j, chosenY)) {
-							notPassedTest = false;
+					for (int j = 0;j < 3;j++) { //For each peg of the ship
+						if (destroyer.doesshipoccupy(chosenX + j, chosenY)) {
+							//cout << "Destroyer occupies " << chosenX + j << ", " << chosenY << " so cruiser cannot.\n";
 						}
-						if (notPassedTest) {
-							successfullyPlaced = true;
+						else {
+							//cout << "Destroyer does not occupy " << chosenX + j << ", " << chosenY << " so cruiser can.\n";
+							spotcheck++;
 						}
 					}
 				}
 				else { //Vertical
-					for (int j = 0;j < 3;j++) {
+					for (int j = 0;j < 3;j++) { //For each peg of the ship
 						if (destroyer.doesshipoccupy(chosenX, chosenY - j)) {
-							notPassedTest = false;
+							//cout << "Destroyer occupies " << chosenX << ", " << chosenY - j << " so cruiser cannot.\n";
 						}
-						successfullyPlaced = true;
+						else {
+							//cout << "Destroyer does not occupy " << chosenX << ", " << chosenY - j << " so cruiser can.\n";
+							spotcheck++;
+						}
 					}
+				}
+				if (spotcheck == 3) {
+					retry = false;
 				}
 				break;
 			case 3:
 				submarine.setlocation(chosenX, chosenY, 3, chosenRotation);
+				spotcheck = 0;
 				if (chosenRotation) { //Horizontal
-					for (int j = 0;j < 3;j++) {
-						if (destroyer.doesshipoccupy(chosenX + j, chosenY)) {
-							notPassedTest = false;
+					for (int j = 0;j < 3;j++) { //For each peg of the ship
+						if (destroyer.doesshipoccupy(chosenX + j, chosenY) || cruiser.doesshipoccupy(chosenX + j, chosenY)) {
+							//cout << "Destroyer or Cruiser occupies " << chosenX + j << ", " << chosenY << " so submarine cannot.\n";
 						}
-						if (cruiser.doesshipoccupy(chosenX + j, chosenY)) {
-							notPassedTest = false;
+						else {
+							//cout << "Destroyer and Cruiser do not occupy " << chosenX + j << ", " << chosenY << " so submarine can.\n";
+							spotcheck++;
 						}
-						successfullyPlaced = true;
 					}
 				}
 				else { //Vertical
-					for (int j = 0;j < 3;j++) {
-						if (destroyer.doesshipoccupy(chosenX, chosenY - j)) {
-							notPassedTest = false;
+					for (int j = 0;j < 3;j++) { //For each peg of the ship
+						if (destroyer.doesshipoccupy(chosenX, chosenY - j) || cruiser.doesshipoccupy(chosenX, chosenY - j)) {
+							//cout << "Destroyer or Cruiser occupies " << chosenX << ", " << chosenY - j << " so submarine cannot.\n";
 						}
-						if (cruiser.doesshipoccupy(chosenX, chosenY - j)) {
-							notPassedTest = false;
+						else {
+							//cout << "Destroyer and Cruiser do not occupy " << chosenX << ", " << chosenY - j << " so submarine can.\n";
+							spotcheck++;
 						}
-						successfullyPlaced = true;
 					}
+				}
+				if (spotcheck == 3) {
+					retry = false;
 				}
 				break;
 			case 4:
 				battleship.setlocation(chosenX, chosenY, 4, chosenRotation);
+				spotcheck = 0;
 				if (chosenRotation) { //Horizontal
-					for (int j = 0;j < 4;j++) {
-						if (destroyer.doesshipoccupy(chosenX + j, chosenY)) {
-							notPassedTest = false;
+					for (int j = 0;j < 4;j++) { //For each peg of the ship
+						if (destroyer.doesshipoccupy(chosenX + j, chosenY) || cruiser.doesshipoccupy(chosenX + j, chosenY) || submarine.doesshipoccupy(chosenX + j, chosenY)) {
+							//cout << "Destroyer, Cruiser, or Submarine occupies " << chosenX + j << ", " << chosenY << " so battlehsip cannot.\n";
 						}
-						if (cruiser.doesshipoccupy(chosenX + j, chosenY)) {
-							notPassedTest = false;
+						else {
+							//cout << "Destroyer, Cruiser, and Submarine do not occupy " << chosenX + j << ", " << chosenY << " so battlehsip can.\n";
+							spotcheck++;
 						}
-						if (submarine.doesshipoccupy(chosenX + j, chosenY)) {
-							notPassedTest = false;
-						}
-						successfullyPlaced = true;
 					}
 				}
 				else { //Vertical
-					for (int j = 0;j < 4;j++) {
-						if (destroyer.doesshipoccupy(chosenX, chosenY - j)) {
-							notPassedTest = false;
+					for (int j = 0;j < 4;j++) { //For each peg of the ship
+						if (destroyer.doesshipoccupy(chosenX, chosenY - j) || cruiser.doesshipoccupy(chosenX, chosenY - j) || submarine.doesshipoccupy(chosenX, chosenY - j)) {
+							//cout << "Destroyer, Cruiser, or Submarine occupies " << chosenX << ", " << chosenY - j << " so battlehsip cannot.\n";
 						}
-						if (cruiser.doesshipoccupy(chosenX, chosenY - j)) {
-							notPassedTest = false;
+						else {
+							//cout << "Destroyer, Cruiser, and Submarine do not occupy " << chosenX << ", " << chosenY - j << " so battlehsip can.\n";
+							spotcheck++;
 						}
-						if (submarine.doesshipoccupy(chosenX, chosenY - j)) {
-							notPassedTest = false;
-						}
-						successfullyPlaced = true;
 					}
+				}
+				if (spotcheck == 4) {
+					retry = false;
 				}
 				break;
 			case 5:
 				aircraftCarrier.setlocation(chosenX, chosenY, 5, chosenRotation);
+				spotcheck = 0;
 				if (chosenRotation) { //Horizontal
-					for (int j = 0;j < 5;j++) {
-						if (destroyer.doesshipoccupy(chosenX + j, chosenY)) {
-							notPassedTest = false;
+					for (int j = 0;j < 5;j++) { //For each peg of the ship
+						if (destroyer.doesshipoccupy(chosenX + j, chosenY) || cruiser.doesshipoccupy(chosenX + j, chosenY) || submarine.doesshipoccupy(chosenX + j, chosenY) || battleship.doesshipoccupy(chosenX + j, chosenY)) {
+							//cout << "Destroyer, Cruiser, Submarine, or Battleship occupies " << chosenX + j << ", " << chosenY << " so Aircraft Carrier cannot.\n";
 						}
-						if (cruiser.doesshipoccupy(chosenX + j, chosenY)) {
-							notPassedTest = false;
+						else {
+							//cout << "Destroyer, Cruiser, Submarine, and Battleship do not occupy " << chosenX + j << ", " << chosenY << " so Aircraft Carrier can.\n";
+							spotcheck++;
 						}
-						if (submarine.doesshipoccupy(chosenX + j, chosenY)) {
-							notPassedTest = false;
-						}
-						if (battleship.doesshipoccupy(chosenX + j, chosenY)) {
-							notPassedTest = false;
-						}
-						successfullyPlaced = true;
 					}
 				}
 				else { //Vertical
-					for (int j = 0;j < 5;j++) {
-						if (destroyer.doesshipoccupy(chosenX, chosenY - j)) {
-							notPassedTest = false;
+					for (int j = 0;j < 5;j++) { //For each peg of the ship
+						if (destroyer.doesshipoccupy(chosenX, chosenY - j) || cruiser.doesshipoccupy(chosenX, chosenY - j) || submarine.doesshipoccupy(chosenX, chosenY - j) || battleship.doesshipoccupy(chosenX, chosenY - j)) {
+							//cout << "Destroyer, Cruiser, Submarine, or Battleship occupies " << chosenX << ", " << chosenY - j << " so Aircraft Carrier cannot.\n";
 						}
-						if (cruiser.doesshipoccupy(chosenX, chosenY - j)) {
-							notPassedTest = false;
+						else {
+							//cout << "Destroyer, Cruiser, Submarine, and Battleship do not occupy " << chosenX << ", " << chosenY - j << " so Aircraft Carrier can.\n";
+							spotcheck++;
 						}
-						if (submarine.doesshipoccupy(chosenX, chosenY - j)) {
-							notPassedTest = false;
-						}
-						if (battleship.doesshipoccupy(chosenX, chosenY - j)) {
-							notPassedTest = false;
-						}
-						successfullyPlaced = true;
 					}
+				}
+				if (spotcheck == 5) {
+					retry = false;
 				}
 				break;
 			}
