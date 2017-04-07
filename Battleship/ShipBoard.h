@@ -5,7 +5,7 @@ class ShipBoard
 public:
 	ShipBoard();
 	~ShipBoard();
-private:
+	void showcontents();
 	Ship aircraftCarrier, battleship, submarine, cruiser, destroyer;
 };
 
