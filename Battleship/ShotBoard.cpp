@@ -11,37 +11,9 @@ ShotBoard::~ShotBoard()
 {
 }
 
-void ShotBoard::recordshot(int x, int y)
-{
-	//Determine if ship part has been hit
-	/*if (who.ships.battleship.doesshipoccupy(x, y)) { //If the battleship is here
-		who.ships.battleship.gethit(x, y);
-		shotboard[x - 1][y - 1] = 2;
-	}
-	else if (who.ships.aircraftCarrier.doesshipoccupy(x, y)) { //If the aircraft carrier is here
-		who.ships.aircraftCarrier.gethit(x, y);
-		shotboard[x - 1][y - 1] = 2;
-	}
-	else if (who.ships.submarine.doesshipoccupy(x, y)) { //If the submarine is here
-		who.ships.submarine.gethit(x, y);
-		shotboard[x - 1][y - 1] = 2;
-	}
-	else if (who.ships.cruiser.doesshipoccupy(x, y)) { //If the cruiser is here
-		who.ships.cruiser.gethit(x, y);
-		shotboard[x - 1][y - 1] = 2;
-	}
-	else if (who.ships.destroyer.doesshipoccupy(x, y)) { //If the destroyer is here
-		who.ships.destroyer.gethit(x, y);
-		shotboard[x - 1][y - 1] = 2;
-	}
-	else {
-		shotboard[x - 1][y - 1] = 1;
-	}*/
-}
-
 void ShotBoard::showshotstaken()
 {
-	cout << "Shots you've taken." << endl;
+	cout << "Shots you've taken:" << endl;
 	cout << "  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  10 |" << endl;
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 	for (int i = 1;i <= 10;i++) { //For each row

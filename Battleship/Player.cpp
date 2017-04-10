@@ -9,11 +9,11 @@ Player::~Player()
 {
 }
 
-void Player::takeshot(bool whoseturn)
+pair<int, int> Player::validateshot()
 {
 	bool retry = true;
+	int xtoshoot, ytoshoot;
 	while (retry) { //Input checking
-		int xtoshoot, ytoshoot;
 		cout << "Where would you like to shoot? [type x space y]: ";
 		cin >> xtoshoot >> ytoshoot;
 		if (xtoshoot > 10 || ytoshoot > 10 || xtoshoot < 1 || ytoshoot < 1) {
@@ -23,10 +23,10 @@ void Player::takeshot(bool whoseturn)
 			cout << "You've already shot there! Please try again.\n";
 		}
 		else {
-			shots.recordshot(xtoshoot, ytoshoot);
 			retry = false;
 		}
 	}
+	return make_pair(xtoshoot, ytoshoot);
 }
 
 bool Player::haslost()

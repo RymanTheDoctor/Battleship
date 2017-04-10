@@ -10,7 +10,7 @@ class Player
 public:
 	Player();
 	~Player();
-	void takeshot(bool whoseturn);
+	pair<int, int> validateshot();
 	bool haslost();
 	ShipBoard ships;
 	ShotBoard shots;

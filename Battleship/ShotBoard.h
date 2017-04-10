@@ -3,12 +3,10 @@
 
 class ShotBoard
 {
-private:
-	int shotboard[10][10];
 public:
 	ShotBoard();
 	~ShotBoard();
-	void recordshot(int x, int y);
+	int shotboard[10][10];
 	void showshotstaken();
 	bool hasshotbeentaken(int x, int y);
 };

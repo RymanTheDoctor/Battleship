@@ -32,13 +32,13 @@ bool Ship::doesshipoccupy(int x, int y)
 bool Ship::haspartbeenhit(int x, int y)
 {
 	if (rotation) { //If the ship is horizontal
-		if ((x - xleft) >= 1 && (x - xleft) <= hitstaken.size()) { //Make sure the point is actually in the dang vector
+		if ((x - xleft) >= 0 && (x - xleft) <= hitstaken.size()) { //Make sure the point is actually in the dang vector
 			return hitstaken.at(x - xleft);
 		}
 		else return false;
 	}
 	else { //If the ship is vertical
-		if ((ytop - y) >= 1 && (ytop - y) <= hitstaken.size()) {
+		if ((ytop - y) >= 0 && (ytop - y) <= hitstaken.size()) {
 			return hitstaken.at(ytop - y);
 		}
 		else return false;
@@ -59,13 +59,13 @@ void Ship::setlocation(int setx, int sety, int setsize, bool setrotation)
 void Ship::gethit(int x, int y)
 {
 	if (rotation) { //If the ship is horizontal
-		if ((x - xleft) >= 1 && (x - xleft) <= hitstaken.size()) { //Make sure the point is actually in the dang vector
+		if ((x - xleft) >= 0 && (x - xleft) <= hitstaken.size()) { //Make sure the point is actually in the dang vector
 			int hittotake = x - xleft;
 			hitstaken[hittotake] = true;
 		}
 	}
 	else { //If the ship is vertical
-		if ((ytop - y) >= 1 && (ytop - y) <= hitstaken.size()) {
+		if ((ytop - y) >= 0 && (ytop - y) <= hitstaken.size()) {
 			int hittotake = ytop - y;
 			hitstaken[hittotake] = true;
 		}

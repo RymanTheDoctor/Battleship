@@ -162,7 +162,7 @@ ShipBoard::~ShipBoard()
 
 void ShipBoard::showcontents()
 {
-	cout << "Your ships' locations." << endl;
+	cout << "Your ships' locations:" << endl;
 	cout << "  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  10 |" << endl;
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 	for (int i = 1;i <= 10;i++) { //For each row
@@ -222,27 +222,5 @@ void ShipBoard::showcontents()
 		cout << endl;
 		cout << "  |     |     |     |     |     |     |     |     |     |     |" << endl;
 		cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-	}
-}
-
-bool ShipBoard::isshiphere(char ship, int x, int y)
-{
-	if (ship == 'D' && destroyer.doesshipoccupy(x, y) == true) {
-		return true;
-	}
-	else if (ship == 'C' && cruiser.doesshipoccupy(x, y) == true) {
-		return true;
-	}
-	else if (ship == 'S' && submarine.doesshipoccupy(x, y) == true) {
-		return true;
-	}
-	else if (ship == 'B' && battleship.doesshipoccupy(x, y) == true) {
-		return true;
-	}
-	else if (ship == 'A' && aircraftCarrier.doesshipoccupy(x, y) == true) {
-		return true;
-	}
-	else {
-		return false;
 	}
 }
