@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ctime>
+#include <cstdlib>
 #include "MainClass.h"
 #include "Ship.h"
 #include "ShipBoard.h"
@@ -19,8 +20,28 @@ MainClass::~MainClass()
 
 int main() {
 	srand(time(NULL));
-	ShipBoard A;
-	A.showcontents();
+	bool whoseturnisit = true;
+	Player A, B;
+	while (!(A.haslost()) && !(B.haslost())) { //Main gameplay loop
+		if (whoseturnisit == true) {
+			A.ships.showcontents();
+			cout << endl;
+			A.shots.showshotstaken();
+			A.takeshot(whoseturnisit);
+			whoseturnisit = false;
+		}
+		else {
+			B.ships.showcontents();
+			cout << endl;
+			B.shots.showshotstaken();
+			B.takeshot(whoseturnisit);
+			whoseturnisit = true;
+		}
+		system("CLS");
+		cout << "Please give the computer to your opponent and look away.\n";
+		system("pause");
+		system("CLS");
+	}
 	system("pause");
 }
 
