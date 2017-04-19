@@ -1,4 +1,10 @@
-﻿  MainClass.cpp
-k:\sftwrdev\battleship\battleship\mainclass.cpp(23): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+﻿  Ship.cpp
+k:\sftwrdev\battleship\battleship\ship.cpp(35): warning C4018: '<=': signed/unsigned mismatch
+k:\sftwrdev\battleship\battleship\ship.cpp(41): warning C4018: '<=': signed/unsigned mismatch
+k:\sftwrdev\battleship\battleship\ship.cpp(67): warning C4018: '<=': signed/unsigned mismatch
+k:\sftwrdev\battleship\battleship\ship.cpp(73): warning C4018: '<=': signed/unsigned mismatch
+  MainClass.cpp
+k:\sftwrdev\battleship\battleship\mainclass.cpp(85): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
   Battleship.vcxproj -> K:\SftwrDev\Battleship\Debug\Battleship.exe
   Battleship.vcxproj -> K:\SftwrDev\Battleship\Debug\Battleship.pdb (Partial PDB)

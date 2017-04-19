@@ -45,6 +45,16 @@ bool Ship::haspartbeenhit(int x, int y)
 	}
 }
 
+bool Ship::issunken()
+{
+	if (rotation) { //If the ship is horizontal
+		
+	}
+	else { //If the ship is vertical
+		
+	}
+}
+
 void Ship::setlocation(int setx, int sety, int setsize, bool setrotation)
 {
 	xleft = setx;

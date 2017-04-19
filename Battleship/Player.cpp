@@ -16,14 +16,21 @@ pair<int, int> Player::validateshot()
 	while (retry) { //Input checking
 		cout << "Where would you like to shoot? [type x space y]: ";
 		cin >> xtoshoot >> ytoshoot;
-		if (xtoshoot > 10 || ytoshoot > 10 || xtoshoot < 1 || ytoshoot < 1) {
-			cout << "That isn't a position on the board! Please try again.\n";
-		}
-		else if (shots.hasshotbeentaken(xtoshoot, ytoshoot) > 0) {
-			cout << "You've already shot there! Please try again.\n";
+		if (cin.fail()) {
+			cout << "That isn't an integer. Please try again.\n";
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
 		else {
-			retry = false;
+			if (xtoshoot > 10 || ytoshoot > 10 || xtoshoot < 1 || ytoshoot < 1) {
+				cout << "That isn't a position on the board! Please try again.\n";
+			}
+			else if (shots.hasshotbeentaken(xtoshoot, ytoshoot) > 0) {
+				cout << "You've already shot there! Please try again.\n";
+			}
+			else {
+				retry = false;
+			}
 		}
 	}
 	return make_pair(xtoshoot, ytoshoot);
