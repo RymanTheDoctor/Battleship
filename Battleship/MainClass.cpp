@@ -44,9 +44,37 @@ void whogoesfirst() {
 		cout << "Someone please call it, and continue when ready.\n";
 		system("pause");
 		if (rand() % 2) {
+			cout << "        _.-'~~`~~'-._" << endl;
+			cout << "     .'`  B   E   R  `'." << endl;
+			cout << "    / I               T \\" << endl;
+			cout << "  /`       .-'~\" - .     `\\" << endl;
+			cout << " ; L      / `-    \      Y  ;" << endl;
+			cout << ";        />  `.  -.|       ;" << endl;
+			cout << "|       /_     '-.__)      |" << endl;
+			cout << "|        |-  _.' \ |        |" << endl;
+			cout << ";        `~~;     \\        ;" << endl;
+			cout << " ;  INGODWE /      \\)      ;" << endl;
+			cout << "  \\  TRUST '.___.-'`\"     / " << endl;
+			cout << "   `\\                   /`" << endl;
+			cout << "     '._   1 9 9 7   _.'" << endl;
+			cout << "        `'-..,,,..-'`" << endl;
 			cout << "Heads will go first.\n";
 		}
 		else {
+			cout << "        _.-'~~`~~'-._" << endl;
+			cout << "     .'`     _**_    `'." << endl;
+			cout << "    /       |    |      \\" << endl;
+			cout << "  /`   _____|    |_____  `\\" << endl;
+			cout << " ;    /________________\\   ;" << endl;
+			cout << ";    |__________________|  ;" << endl;
+			cout << "|     \\ /\\ /\\ /\\ /\\ /\\ /   |" << endl;
+			cout << "|      I  I  I  I  I  I    |" << endl;
+			cout << ";      I  I  I  I  I  I    ;" << endl;
+			cout << " ;     I  I  I  I  I  I    ;" << endl;
+			cout << "  \\    I  I  I  I  I  I   / " << endl;
+			cout << "   `\\                   /`" << endl;
+			cout << "     '._   1 9 9 7   _.'" << endl;
+			cout << "        `'-..,,,..-'`" << endl;
 			cout << "Tails will go first.\n";
 		}
 		system("pause");

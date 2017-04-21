@@ -47,11 +47,17 @@ bool Ship::haspartbeenhit(int x, int y)
 
 bool Ship::issunken()
 {
-	if (rotation) { //If the ship is horizontal
-		
+	int hitsbeentaken = 0;
+	for (int i = 0;i < hitstaken.size();i++) {
+		if (hitstaken[i] == true) {
+			hitsbeentaken++;
+		}
 	}
-	else { //If the ship is vertical
-		
+	if (hitsbeentaken == hitstaken.size()) {
+		return true;
+	}
+	else {
+		return false;
 	}
 }
 
