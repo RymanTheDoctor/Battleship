@@ -14,10 +14,20 @@ pair<int, int> Player::validateshot()
 	bool retry = true;
 	int xtoshoot, ytoshoot;
 	while (retry) { //Input checking
-		cout << "Where would you like to shoot? [type x space y]: ";
+		cout << "Where would you like to shoot? You can also enter a letter for a key to read theboards.\n";
+		cout << "[type x space y]: ";
 		cin >> xtoshoot >> ytoshoot;
 		if (cin.fail()) {
-			cout << "That isn't an integer. Please try again.\n";
+			cout << "That isn't an integer. To shoot, please try again.\n";
+			cout << "Key for Ships:\n";
+			cout << "A = Aircraft Carrier\n";
+			cout << "B = Battleship\n";
+			cout << "C = Cruiser\n";
+			cout << "D = Destroyer\n";
+			cout << "S = Submarine\n" << endl;
+			cout << "Key for Shots:\n";
+			cout << "H = Hit\n";
+			cout << "M = Miss\n";
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}

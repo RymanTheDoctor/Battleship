@@ -111,141 +111,180 @@ void titlescreen() {
 
 int main() {
 	srand(time(NULL));
-	bool whoseturnisit = true;
-	Player A, B;
-	int x, y, totalturns = 1, poneturns = 1, ptwoturns = 1;
-	titlescreen();
-	whogoesfirst();
-	while (!(A.haslost()) && !(B.haslost())) { //Main gameplay loop
-		if (whoseturnisit == true) {
-			cout << "Player 1's Turn. This is your " << poneturns;
-			ordinal(poneturns);
-			if (totalturns == 1) {
-				cout << "turn.\n";
+	while (true) {
+		bool whoseturnisit = true;
+		Player A, B;
+		int x, y, totalturns = 1, poneturns = 1, ptwoturns = 1;
+		titlescreen();
+		whogoesfirst();
+		while (!(A.haslost()) && !(B.haslost())) { //Main gameplay loop
+			if (whoseturnisit == true) {
+				cout << "Player 1's Turn. This is your " << poneturns;
+				ordinal(poneturns);
+				if (totalturns == 1) {
+					cout << "turn.\n";
+				}
+				else {
+					cout << "turn. The game has had " << totalturns << " total turns.\n";
+				}
+				A.ships.showcontents();
+				cout << endl;
+				A.shots.showshotstaken();
+				tie(x, y) = A.validateshot();
+				if (B.ships.battleship.doesshipoccupy(x, y)) { //If the battleship is here
+					B.ships.battleship.gethit(x, y);
+					A.shots.shotboard[x - 1][y - 1] = 2;
+					cout << "Your shot hit!";
+					if (B.ships.battleship.issunken()) {
+						cout << " You sunk their Battleship!";
+					}
+				}
+				else if (B.ships.aircraftCarrier.doesshipoccupy(x, y)) { //If the aircraft carrier is here
+					B.ships.aircraftCarrier.gethit(x, y);
+					A.shots.shotboard[x - 1][y - 1] = 2;
+					cout << "Your shot hit!";
+					if (B.ships.aircraftCarrier.issunken()) {
+						cout << " You sunk their Aircraft Carrier!";
+					}
+				}
+				else if (B.ships.submarine.doesshipoccupy(x, y)) { //If the submarine is here
+					B.ships.submarine.gethit(x, y);
+					A.shots.shotboard[x - 1][y - 1] = 2;
+					cout << "Your shot hit!";
+					if (B.ships.submarine.issunken()) {
+						cout << " You sunk their Submarine!";
+					}
+				}
+				else if (B.ships.cruiser.doesshipoccupy(x, y)) { //If the cruiser is here
+					B.ships.cruiser.gethit(x, y);
+					A.shots.shotboard[x - 1][y - 1] = 2;
+					cout << "Your shot hit!";
+					if (B.ships.cruiser.issunken()) {
+						cout << " You sunk their Cruiser!";
+					}
+				}
+				else if (B.ships.destroyer.doesshipoccupy(x, y)) { //If the destroyer is here
+					B.ships.destroyer.gethit(x, y);
+					A.shots.shotboard[x - 1][y - 1] = 2;
+					cout << "Your shot hit!";
+					if (B.ships.destroyer.issunken()) {
+						cout << " You sunk their Destroyer!";
+					}
+				}
+				else {
+					A.shots.shotboard[x - 1][y - 1] = 1;
+					cout << "Your shot missed...";
+				}
+				poneturns++;
+				totalturns++;
+				whoseturnisit = false;
 			}
 			else {
+				cout << "Player 2's Turn. This is your " << ptwoturns;
+				ordinal(ptwoturns);
 				cout << "turn. The game has had " << totalturns << " total turns.\n";
+				B.ships.showcontents();
+				cout << endl;
+				B.shots.showshotstaken();
+				tie(x, y) = B.validateshot();
+				if (A.ships.battleship.doesshipoccupy(x, y)) { //If the battleship is here
+					A.ships.battleship.gethit(x, y);
+					B.shots.shotboard[x - 1][y - 1] = 2;
+					cout << "Your shot hit!";
+					if (A.ships.battleship.issunken()) {
+						cout << " You sunk their Battleship!";
+					}
+				}
+				else if (A.ships.aircraftCarrier.doesshipoccupy(x, y)) { //If the aircraft carrier is here
+					A.ships.aircraftCarrier.gethit(x, y);
+					B.shots.shotboard[x - 1][y - 1] = 2;
+					cout << "Your shot hit!";
+					if (A.ships.aircraftCarrier.issunken()) {
+						cout << " You sunk their Aircraft Carrier!";
+					}
+				}
+				else if (A.ships.submarine.doesshipoccupy(x, y)) { //If the submarine is here
+					A.ships.submarine.gethit(x, y);
+					B.shots.shotboard[x - 1][y - 1] = 2;
+					cout << "Your shot hit!";
+					if (A.ships.submarine.issunken()) {
+						cout << " You sunk their Submarine!";
+					}
+				}
+				else if (A.ships.cruiser.doesshipoccupy(x, y)) { //If the cruiser is here
+					A.ships.cruiser.gethit(x, y);
+					B.shots.shotboard[x - 1][y - 1] = 2;
+					cout << "Your shot hit!";
+					if (A.ships.cruiser.issunken()) {
+						cout << " You sunk their Cruiser!";
+					}
+				}
+				else if (A.ships.destroyer.doesshipoccupy(x, y)) { //If the destroyer is here
+					A.ships.destroyer.gethit(x, y);
+					B.shots.shotboard[x - 1][y - 1] = 2;
+					cout << "Your shot hit!";
+					if (A.ships.destroyer.issunken()) {
+						cout << " You sunk their Destroyer!";
+					}
+				}
+				else {
+					B.shots.shotboard[x - 1][y - 1] = 1;
+					cout << "Your shot missed...";
+				}
+				ptwoturns++;
+				totalturns++;
+				whoseturnisit = true;
 			}
-			A.ships.showcontents();
 			cout << endl;
-			A.shots.showshotstaken();
-			tie(x, y) = A.validateshot();
-			if (B.ships.battleship.doesshipoccupy(x, y)) { //If the battleship is here
-				B.ships.battleship.gethit(x, y);
-				A.shots.shotboard[x - 1][y - 1] = 2;
-				cout << "Your shot hit!";
-				if (B.ships.battleship.issunken()) {
-					cout << " You sunk their Battleship!";
-				}
-			}
-			else if (B.ships.aircraftCarrier.doesshipoccupy(x, y)) { //If the aircraft carrier is here
-				B.ships.aircraftCarrier.gethit(x, y);
-				A.shots.shotboard[x - 1][y - 1] = 2;
-				cout << "Your shot hit!";
-				if (B.ships.aircraftCarrier.issunken()) {
-					cout << " You sunk their Aircraft Carrier!";
-				}
-			}
-			else if (B.ships.submarine.doesshipoccupy(x, y)) { //If the submarine is here
-				B.ships.submarine.gethit(x, y);
-				A.shots.shotboard[x - 1][y - 1] = 2;
-				cout << "Your shot hit!";
-				if (B.ships.submarine.issunken()) {
-					cout << " You sunk their Submarine!";
-				}
-			}
-			else if (B.ships.cruiser.doesshipoccupy(x, y)) { //If the cruiser is here
-				B.ships.cruiser.gethit(x, y);
-				A.shots.shotboard[x - 1][y - 1] = 2;
-				cout << "Your shot hit!";
-				if (B.ships.cruiser.issunken()) {
-					cout << " You sunk their Cruiser!";
-				}
-			}
-			else if (B.ships.destroyer.doesshipoccupy(x, y)) { //If the destroyer is here
-				B.ships.destroyer.gethit(x, y);
-				A.shots.shotboard[x - 1][y - 1] = 2;
-				cout << "Your shot hit!";
-				if (B.ships.destroyer.issunken()) {
-					cout << " You sunk their Destroyer!";
-				}
-			}
-			else {
-				A.shots.shotboard[x - 1][y - 1] = 1;
-				cout << "Your shot missed...";
-			}
-			poneturns++;
-			totalturns++;
-			whoseturnisit = false;
+			system("pause");
+			system("CLS");
+			cout << "Please give the computer to your opponent and look away.\n";
+			system("pause");
+			system("CLS");
+		}
+		if (A.haslost() == true) {
+			cout << "Player 2 is the winner!\n";
 		}
 		else {
-			cout << "Player 2's Turn. This is your " << ptwoturns;
-			ordinal(ptwoturns);
-			cout << "turn. The game has had " << totalturns << " total turns.\n";
-			B.ships.showcontents();
-			cout << endl;
-			B.shots.showshotstaken();
-			tie(x, y) = B.validateshot();
-			if (A.ships.battleship.doesshipoccupy(x, y)) { //If the battleship is here
-				A.ships.battleship.gethit(x, y);
-				B.shots.shotboard[x - 1][y - 1] = 2;
-				cout << "Your shot hit!";
-				if (A.ships.battleship.issunken()) {
-					cout << " You sunk their Battleship!";
-				}
-			}
-			else if (A.ships.aircraftCarrier.doesshipoccupy(x, y)) { //If the aircraft carrier is here
-				A.ships.aircraftCarrier.gethit(x, y);
-				B.shots.shotboard[x - 1][y - 1] = 2;
-				cout << "Your shot hit!";
-				if (A.ships.aircraftCarrier.issunken()) {
-					cout << " You sunk their Aircraft Carrier!";
-				}
-			}
-			else if (A.ships.submarine.doesshipoccupy(x, y)) { //If the submarine is here
-				A.ships.submarine.gethit(x, y);
-				B.shots.shotboard[x - 1][y - 1] = 2;
-				cout << "Your shot hit!";
-				if (A.ships.submarine.issunken()) {
-					cout << " You sunk their Submarine!";
-				}
-			}
-			else if (A.ships.cruiser.doesshipoccupy(x, y)) { //If the cruiser is here
-				A.ships.cruiser.gethit(x, y);
-				B.shots.shotboard[x - 1][y - 1] = 2;
-				cout << "Your shot hit!";
-				if (A.ships.cruiser.issunken()) {
-					cout << " You sunk their Cruiser!";
-				}
-			}
-			else if (A.ships.destroyer.doesshipoccupy(x, y)) { //If the destroyer is here
-				A.ships.destroyer.gethit(x, y);
-				B.shots.shotboard[x - 1][y - 1] = 2;
-				cout << "Your shot hit!";
-				if (A.ships.destroyer.issunken()) {
-					cout << " You sunk their Destroyer!";
-				}
-			}
-			else {
-				B.shots.shotboard[x - 1][y - 1] = 1;
-				cout << "Your shot missed...";
-			}
-			ptwoturns++;
-			totalturns++;
-			whoseturnisit = true;
+			cout << "Player 1 is the winner!\n";
 		}
 		cout << endl;
-		system("pause");
-		system("CLS");
-		cout << "Please give the computer to your opponent and look away.\n";
-		system("pause");
-		system("CLS");
+		cout << "                                      /    _,'|" << endl;
+		cout << "                                     /_ _,'   |" << endl;
+		cout << "                                    $$;'     _;" << endl;
+		cout << "                    ,-'-._    ,-'. ,-'    _.'" << endl;
+		cout << "                    \\     `-,'  ,-'    _,'" << endl;
+		cout << "                 ,....       ;,'    ,,'" << endl;
+		cout << "               ,'     \\   _,'    ,-' ," << endl;
+		cout << "                `-.    i,'    ,-'  ~'" << endl;
+		cout << "_,~')_,~')_,~')_,~')_,~')_,~')_,~')_,~')/,~')__,~')_,~')_" << endl;
+		cout << "                .',-'   ,-'" << endl;
+		cout << "             .'.-'  _,-'" << endl;
+		cout << "           ',-'  _,'" << endl;
+		cout << "         _,'  _,'" << endl;
+		cout << "         \\ ,,'" << endl;
+		cout << "          '" << endl << endl;
+		char review;
+		cout << "Would you like to see the boards? [y/n]";
+		cin >> review;
+		review = tolower(review);
+		if (review == 'y') {
+			cout << "Player 1\n";
+			A.ships.showcontents();
+			cout << endl;
+			cout << "Player 2\n";
+			B.ships.showcontents();
+			cout << endl;
+		}
+		char playagain;
+		cout << "Would you like to play again? [y/n]";
+		cin >> playagain;
+		playagain = tolower(playagain);
+		if (playagain != 'y') {
+			break;
+		}
+		else {
+			system("CLS");
+		}
 	}
-	if (A.haslost() == true) {
-		cout << "Player 2 is the winner!\n";
-	}
-	else {
-		cout << "Player 1 is the winner!\n";
-	}
-	system("pause");
 }
